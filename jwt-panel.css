@@ -1,0 +1,36 @@
+dl {
+}
+dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
+  color: green;
+}
+dt::after {
+  content: ":";
+}
+dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
+dd dt {
+  width: 60px;
+}
+dd dd {
+  margin: 0 0 0 70px;
+}
+#caption {
+  font-weight: bold;
+}
+.ts {
+  font-style: italic;
+  color: #333333;
+}
+.ts::before {
+  content: " (";
+}
+.ts::after {
+  content: ")";
+}

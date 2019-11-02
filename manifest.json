@@ -1,0 +1,10 @@
+{
+   "name": "JWT Inspector",
+   "version": "1.0",
+   "description": "Display JWT bearer tokens in a new tab in Chrome's Developer Tools",
+   "author": "Tore Green",
+   "icons": { "128": "icon128.png" },
+   "homepage_url": "https://githib.com/bugjam/jwt-inspector",
+   "devtools_page": "devtools.html",
+   "manifest_version": 2
+ }
