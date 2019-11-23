@@ -47,16 +47,31 @@ function render(claims, url, time) {
   caption.appendChild(ts);
 }
 
+function updateCopyButton(tok) {
+  var b = document.getElementById("copy_token");
+  b.dataset.token = tok;
+  b.disabled = false;
+}
+
+function copyToken() {
+  var t = this.dataset.token;
+  navigator.clipboard.writeText(t);
+}
+
 function onRequestFinished(request) {
   var tok = bearer_token(request.request.headers.find(bearer_token));
   if(!tok) return;
   try {
     var parts = tok.split('.');
     var claims = JSON.parse(atob(parts[1]));
-    render(claims, request.request.url, request.startedDateTime);    
+    render(claims, request.request.url, request.startedDateTime);
+    updateCopyButton(tok);
   } catch (error) {
     // Not a token we can extract and decode
   }
 }
 
 chrome.devtools.network.onRequestFinished.addListener(onRequestFinished);
+window.onload = function() {
+  document.getElementById("copy_token").onclick = copyToken;
+}
