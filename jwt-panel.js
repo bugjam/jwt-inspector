@@ -53,6 +53,7 @@ function updateCopyButton(tok) {
   b.disabled = false;
 }
 
+// Taken from: https://stackoverflow.com/a/18455088/1823175
 function copyTextToClipboard(text) {
   //Create a textbox field where we can insert text to. 
   var copyFrom = document.createElement("textarea");
