@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2] - 2021-06-19
+
+### Changed
+
+ - Changed formatting of the output to be table-based to make it more resilient to
+   long claim names [#2](https://github.com/bugjam/jwt-inspector/issues/2)
+
 ## [1.1.1] - 2020-09-23
 
 ### Fixed

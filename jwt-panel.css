@@ -1,25 +1,14 @@
-dl {
-}
-dt {
-  float: left;
-  clear: left;
-  width: 100px;
-  text-align: right;
-  font-weight: bold;
+td:first-child {
   color: green;
+  font-weight: bold;
+  text-align: right;
+  vertical-align: text-top;
+  padding-right: 0.5em;
+  max-width: 50%;
+  overflow-wrap: anywhere;
 }
-dt::after {
+td:first-child::after {
   content: ":";
-}
-dd {
-  margin: 0 0 0 110px;
-  padding: 0 0 0.5em 0;
-}
-dd dt {
-  width: 60px;
-}
-dd dd {
-  margin: 0 0 0 70px;
 }
 #caption {
   font-weight: bold;

@@ -10,27 +10,29 @@ function isObject(obj) {
 const ts_claims = ["exp","iat","nbf"];
 
 function renderClaims(claims) {
-  var dl = document.createElement("dl");
+  var table = document.createElement("table");
   for(var c in claims) {
-    var dt = document.createElement("dt");
-    dt.appendChild(document.createTextNode(Encoder.htmlEncode(String(c))));
-    dl.appendChild(dt);
-    var dd = document.createElement("dd");
+    var row = document.createElement("tr");
+    var td1 = document.createElement("td");
+    td1.appendChild(document.createTextNode(Encoder.htmlEncode(String(c))));
+    row.appendChild(td1);
+    var td2 = document.createElement("td");
     if(isObject(claims[c])) {
-      dd.appendChild(renderClaims(claims[c]));
+      td2.appendChild(renderClaims(claims[c]));
     } else {
-      dd.appendChild(document.createTextNode(Encoder.htmlEncode(String(claims[c]))));
+      td2.appendChild(document.createTextNode(Encoder.htmlEncode(String(claims[c]))));
       if(ts_claims.includes(c)) {
         var ts = document.createElement("span");
         ts.className = "ts";
         var d = new Date(claims[c]*1000);
         ts.appendChild(document.createTextNode(d.toLocaleString()));
-        dd.appendChild(ts);
+        td2.appendChild(ts);
       }
     }
-    dl.appendChild(dd);
+    row.appendChild(td2);
+    table.appendChild(row);
   }
-  return dl;
+  return table;
 }
 
 function render(claims, url, time) {
@@ -55,14 +57,14 @@ function updateCopyButton(tok) {
 
 // Taken from: https://stackoverflow.com/a/18455088/1823175
 function copyTextToClipboard(text) {
-  //Create a textbox field where we can insert text to. 
+  //Create a textbox field where we can insert text to.
   var copyFrom = document.createElement("textarea");
 
   //Set the text content to be the text you wished to copy.
   copyFrom.textContent = text;
 
-  //Append the textbox field into the body as a child. 
-  //"execCommand()" only works when there exists selected text, and the text is inside 
+  //Append the textbox field into the body as a child.
+  //"execCommand()" only works when there exists selected text, and the text is inside
   //document.body (meaning the text is part of a valid rendered HTML element).
   document.body.appendChild(copyFrom);
 
@@ -72,10 +74,10 @@ function copyTextToClipboard(text) {
   //Execute command
   document.execCommand('copy');
 
-  //(Optional) De-select the text using blur(). 
+  //(Optional) De-select the text using blur().
   copyFrom.blur();
 
-  //Remove the textbox field from the document.body, so no other JavaScript nor 
+  //Remove the textbox field from the document.body, so no other JavaScript nor
   //other elements can get access to this.
   document.body.removeChild(copyFrom);
 }
