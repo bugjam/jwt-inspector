@@ -15,11 +15,17 @@ td:first-child::after {
 }
 .ts {
   font-style: italic;
-  color: #333333;
+  color: firebrick;
 }
 .ts::before {
   content: " (";
 }
 .ts::after {
   content: ")";
+}
+@media (prefers-color-scheme: dark) {
+  * { color: silver; }
+  button { color: black; }
+  td:first-child { color: darkseagreen; }
+  .ts { color: lightcoral; }
 }

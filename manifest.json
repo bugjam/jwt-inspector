@@ -1,7 +1,7 @@
 {
    "name": "JWT Inspector",
    "short_name": "JWT",
-   "version": "1.2",
+   "version": "1.3",
    "description": "Display JWT bearer tokens in a new tab in Chrome's Developer Tools",
    "author": "Tore Green",
    "icons": { "128": "icon128.png",
