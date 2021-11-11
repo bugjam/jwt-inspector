@@ -31,11 +31,8 @@ fieldset {
   border-radius:8px;	
   }
 legend {
-  color: #FFF;
-  background: #000;
+  color: #000;
   font-size: 1.5em;
-  padding: 5px;
-  
   }
 @media (prefers-color-scheme: dark) {
   * { color: silver; }
@@ -46,7 +43,6 @@ legend {
     border: thick solid #fff;
     }
   legend {
-    color: #000;
-    background: #fff;
+    color: #fff;
     }
 }
