@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4] - 2021-11-14
+
+### Added
+
+- Add display of JWT header fields (from [achebrol](https://github.com/achebrol))
+
 ## [1.3.1] - 2021-06-19
 
 ### Fixed
