@@ -27,22 +27,28 @@ td:first-child::after {
 fieldset {
   border: 2px solid #000;
   -moz-border-radius:8px;
-  -webkit-border-radius:8px;	
-  border-radius:8px;	
+  -webkit-border-radius:8px;
+  border-radius:8px;
   }
 legend {
   color: #000;
   font-size: 1.5em;
   }
 @media (prefers-color-scheme: dark) {
-  * { color: silver; }
-  button { color: black; }
+  * {
+    color: silver;
+    background-color: #202124;
+  }
+  button {
+    background-color: silver;
+    color: #202124;
+  }
   td:first-child { color: darkseagreen; }
   .ts { color: lightcoral; }
   fieldset {
-    border: thick solid #fff;
+    border: thick solid #494c50;
     }
   legend {
-    color: #fff;
+    color: #9aa0a5;
     }
 }
