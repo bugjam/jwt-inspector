@@ -35,7 +35,13 @@ function renderClaims(claims) {
   return table;
 }
 
-function render(claims, url, time) {
+function render(header, claims, url, time) {
+
+  var divHeader = document.getElementById("header");
+  var dlHeader = renderClaims(header);
+  divHeader.innerHTML = "";
+  divHeader.appendChild(dlHeader);
+
   var div = document.getElementById("claims");
   var dl = renderClaims(claims);
   div.innerHTML = "";
@@ -92,8 +98,9 @@ function onRequestFinished(request) {
   if(!tok) return;
   try {
     var parts = tok.split('.');
+    var header = JSON.parse(atob(parts[0]));
     var claims = JSON.parse(atob(parts[1]));
-    render(claims, request.request.url, request.startedDateTime);
+    render(header, claims, request.request.url, request.startedDateTime);
     updateCopyButton(tok);
   } catch (error) {
     // Not a token we can extract and decode
