@@ -1,5 +1,27 @@
+var options = {
+  header_name: "authorization",
+  header_prefix: "Bearer "
+};
+
+function setOptions(o) {
+  options.header_name = o.header_name.toLowerCase().trim();
+  options.header_prefix = o.header_prefix;
+  if(options.header_prefix.trim().length>0 && !options.header_prefix.endsWith(' ')) {
+    options.header_prefix += ' ';
+  }
+  var caption = document.getElementById("caption");
+  caption.innerHTML = 'Waiting for request with <b>'+Encoder.htmlEncode(o.header_name)+
+                      ': '+Encoder.htmlEncode(o.header_prefix)+' [token]</b>'+
+                      '<br>(Go to <b>Extentions > JWT Inspector > Options</b> to customize)';
+}
+
 function bearer_token(h) {
-  return h && h.name && h.name.toLowerCase() == "authorization" && h.value && h.value.startsWith("Bearer ") ? h.value.substring(7) : null;
+  return h
+         && h.name
+         && h.name.toLowerCase() == options.header_name
+         && h.value
+         && h.value.startsWith(options.header_prefix)
+         ? h.value.substring(options.header_prefix.length) : null;
 }
 
 function isObject(obj) {
@@ -110,4 +132,8 @@ function onRequestFinished(request) {
 chrome.devtools.network.onRequestFinished.addListener(onRequestFinished);
 window.onload = function() {
   document.getElementById("copy_token").onclick = copyToken;
-}
+  chrome.storage.local.get(options, setOptions);
+};
+chrome.storage.onChanged.addListener( function(changes, namespace) {
+  chrome.storage.local.get(options, setOptions);
+});

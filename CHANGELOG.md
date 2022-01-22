@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5] - 2022-01-22
+
+### Added
+
+- Make header name and prefix configurable from options page [#5](https://github.com/bugjam/jwt-inspector/issues/5)
+
 ## [1.4] - 2021-11-14
 
 ### Added

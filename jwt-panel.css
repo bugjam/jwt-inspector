@@ -11,9 +11,6 @@ td:first-child {
 td:first-child::after {
   content: ":";
 }
-#caption {
-  font-weight: bold;
-}
 .ts {
   font-style: italic;
   color: firebrick;
