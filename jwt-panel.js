@@ -1,11 +1,13 @@
 var options = {
   header_name: "authorization",
-  header_prefix: "Bearer "
+  header_prefix: "Bearer ",
+  copy_prefix: false
 };
 
 function setOptions(o) {
   options.header_name = o.header_name.toLowerCase().trim();
   options.header_prefix = o.header_prefix;
+  options.copy_prefix = o.copy_prefix;
   if(options.header_prefix.trim().length>0 && !options.header_prefix.endsWith(' ')) {
     options.header_prefix += ' ';
   }
@@ -79,7 +81,7 @@ function render(header, claims, url, time) {
 
 function updateCopyButton(tok) {
   var b = document.getElementById("copy_token");
-  b.dataset.token = tok;
+  b.dataset.token = options.copy_prefix ? options.header_prefix+tok : tok;
   b.disabled = false;
 }
 
