@@ -1,29 +1,33 @@
 var options = {
   header_name: "authorization",
-  header_prefix: "Bearer ",
+  header_prefix: ["Bearer "],
   copy_prefix: false
 };
 
 function setOptions(o) {
   options.header_name = o.header_name.toLowerCase().trim();
-  options.header_prefix = o.header_prefix;
+  options.header_prefix = typeof o.header_prefix == "string" ? o.header_prefix.split(',') : o.header_prefix;
   options.copy_prefix = o.copy_prefix;
-  if(options.header_prefix.trim().length>0 && !options.header_prefix.endsWith(' ')) {
-    options.header_prefix += ' ';
+  for(var i = 0 ; i<options.header_prefix.length ; i++) {
+    if(options.header_prefix[i].trim().length>0 && !options.header_prefix[i].endsWith(' ')) {
+      options.header_prefix[i] += ' ';
+    }
   }
   var caption = document.getElementById("caption");
+  var p = options.header_prefix.length>1 ? '{'+options.header_prefix.join()+'}' : options.header_prefix[0];
   caption.innerHTML = 'Waiting for request with <b>'+Encoder.htmlEncode(o.header_name)+
-                      ': '+Encoder.htmlEncode(o.header_prefix)+' [token]</b>'+
+                      ': '+Encoder.htmlEncode(p)+' [token]</b>'+
                       '<br>(Go to <b>Extentions > JWT Inspector > Options</b> to customize)';
 }
 
 function bearer_token(h) {
-  return h
-         && h.name
-         && h.name.toLowerCase() == options.header_name
-         && h.value
-         && h.value.startsWith(options.header_prefix)
-         ? h.value.substring(options.header_prefix.length) : null;
+  if(h && h.name && h.name.toLowerCase() == options.header_name && h.value) {
+    var p = options.header_prefix.find( s => h.value.startsWith(s) );
+    if(p) {
+      return { prefix:p , tok:h.value.substring(p.length) };
+    }
+  }
+  return null;
 }
 
 function isObject(obj) {
@@ -79,9 +83,9 @@ function render(header, claims, url, time) {
   caption.appendChild(ts);
 }
 
-function updateCopyButton(tok) {
+function updateCopyButton(p,tok) {
   var b = document.getElementById("copy_token");
-  b.dataset.token = options.copy_prefix ? options.header_prefix+tok : tok;
+  b.dataset.token = options.copy_prefix ? p+tok : tok;
   b.disabled = false;
 }
 
@@ -118,14 +122,14 @@ function copyToken() {
 }
 
 function onRequestFinished(request) {
-  var tok = bearer_token(request.request.headers.find(bearer_token));
-  if(!tok) return;
+  var h = bearer_token(request.request.headers.find(bearer_token));
+  if(!h) return;
   try {
-    var parts = tok.split('.');
+    var parts = h.tok.split('.');
     var header = JSON.parse(atob(parts[0]));
     var claims = JSON.parse(atob(parts[1]));
     render(header, claims, request.request.url, request.startedDateTime);
-    updateCopyButton(tok);
+    updateCopyButton(h.prefix,h.tok);
   } catch (error) {
     // Not a token we can extract and decode
   }

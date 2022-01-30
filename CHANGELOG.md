@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] - 2022-01-30
+
+### Changed
+
+- Change prefix option to support comma separated list of prefixes
+
 ## [1.6] - 2022-01-22
 
 ### Added
