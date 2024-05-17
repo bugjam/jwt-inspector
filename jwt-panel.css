@@ -1,3 +1,7 @@
+table {
+  font-size: small;
+}
+
 td:first-child {
   color: green;
   font-weight: bold;
@@ -23,13 +27,11 @@ td:first-child::after {
 }
 fieldset {
   border: 2px solid #000;
-  -moz-border-radius:8px;
-  -webkit-border-radius:8px;
   border-radius:8px;
+  margin-bottom: 0.5em;
   }
 legend {
   color: #000;
-  font-size: 1.5em;
   }
 @media (prefers-color-scheme: dark) {
   * {
