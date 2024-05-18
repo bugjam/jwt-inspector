@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8] - 2024-05-18
+
 ### Added
 
 - New option to control wrapping behaviour for long claim names. Default is less aggressive wrapping which should solve [#6](https://github.com/bugjam/jwt-inspector/issues/6).
