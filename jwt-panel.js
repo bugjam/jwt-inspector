@@ -1,13 +1,15 @@
 var options = {
   header_name: "authorization",
   header_prefix: ["Bearer "],
-  copy_prefix: false
+  copy_prefix: false,
+  wrap_claim_names: false
 };
 
 function setOptions(o) {
   options.header_name = o.header_name.toLowerCase().trim();
   options.header_prefix = typeof o.header_prefix == "string" ? o.header_prefix.split(',') : o.header_prefix;
   options.copy_prefix = o.copy_prefix;
+  options.wrap_claim_names = o.wrap_claim_names;
   for(var i = 0 ; i<options.header_prefix.length ; i++) {
     if(options.header_prefix[i].trim().length>0 && !options.header_prefix[i].endsWith(' ')) {
       options.header_prefix[i] += ' ';
@@ -43,6 +45,7 @@ function renderClaims(claims) {
     var row = document.createElement("tr");
     var td1 = document.createElement("td");
     td1.appendChild(document.createTextNode(Encoder.htmlEncode(String(c))));
+    td1.className = options.wrap_claim_names ? "wrap-anywhere" : "wrap-words";
     row.appendChild(td1);
     var td2 = document.createElement("td");
     if(isObject(claims[c])) {
